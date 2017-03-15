@@ -1,0 +1,13 @@
+<div id="articles">
+
+  <h2>Articles One</h2>
+  <% if !@articles.nil? %>
+    <% @articles.each do |article| %>
+      <div class="article">
+        <h2 style="color:green;"><%= link_to strip_tags("#{article.title}"), articles_path(id: article.id) %></h2>
+        <a href='<%= article.url %>'><%= strip_tags(article.url) %></a>
+        <p><%= strip_tags(article.content) %></p>
+      </div>
+    <% end %>
+  <% end %>
+</div>

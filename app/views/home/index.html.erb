@@ -1,0 +1,36 @@
+<div id="wrapper">
+  <div id="navigation-sidebar">
+      <ul>
+          <li>Associated Press</li>
+          <li>Bloomberg</li>
+          <li>Economist</li>
+          <li>Reuters</li>
+      </ul>
+      <% if !@subscriptions.nil? %>
+        <% @subscriptions.each do |subscrption| %>
+            <%= link_to subscription.name, articles_path(subscription.id) %>
+        <% end %>
+      <% end %>
+  </div>
+
+  <div id="header"></div>
+
+  <div id="main-content">
+      <div id="headlines" style="display:inline; width:30%; height: 90px;">
+          <% @articles.where(headline: 1).take(3).each do |headline| %>
+              <div class="headline">
+                  <img src='#{headline.image}', alt="woops!" >
+                  <h2 style="text-align:center; color:black; border-bottom: solid thin;"><%= link_to strip_tags(headline.title), article_path(headline.id) %></h2>
+                  <%# <p style="width: 90%; text-align:left; margin:auto"><%= headline.preview -%></p>
+              </div>
+          <% end %>
+      </div>
+      <% @articles.where(headline: 0).take(20).each do |article| %>
+          <div class="article" style="width:80%; margin:auto;">
+            <img src="#{article.source_img}", alt="woops!">
+            <h2 style="text-align:center; color:black; border-bottom: solid thin;"><%= link_to strip_tags(article.title), article_path(article.id) %></h2>
+            <p style="width: 90%; text-align:left; margin:auto"><%# article.preview -%></p>
+          </div>
+      <% end %>
+  </div>
+</div>
